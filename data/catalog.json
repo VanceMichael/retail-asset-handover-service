@@ -1,0 +1,155 @@
+{
+  "synthetic": true,
+  "records": [
+    {
+      "id": "store-A",
+      "kind": "store",
+      "refs": [],
+      "name": "合成东店"
+    },
+    {
+      "id": "store-B",
+      "kind": "store",
+      "refs": [],
+      "name": "合成西店"
+    },
+    {
+      "id": "rack-A",
+      "kind": "asset",
+      "refs": [
+        "store-A"
+      ],
+      "ownership": "owned",
+      "serial": "RACK-A",
+      "quantity": 1
+    },
+    {
+      "id": "stock-A",
+      "kind": "asset",
+      "refs": [
+        "store-A"
+      ],
+      "ownership": "owned",
+      "batch": "LOT-A",
+      "quantity": 20
+    },
+    {
+      "id": "stock-B",
+      "kind": "asset",
+      "refs": [
+        "store-B"
+      ],
+      "ownership": "consigned",
+      "batch": "LOT-B",
+      "quantity": 15,
+      "owner": "supplier-B"
+    },
+    {
+      "id": "grant-B",
+      "kind": "disposal_grant",
+      "refs": [
+        "stock-B"
+      ],
+      "grantor": "supplier-B",
+      "maximum_quantity": 10,
+      "expires": "2026-12-15T00:00:00+08:00"
+    },
+    {
+      "id": "customer-order",
+      "kind": "retail_order",
+      "refs": [
+        "stock-A"
+      ],
+      "customer": "customer-A",
+      "quantity": 3,
+      "at": "2026-12-05T09:00:00+08:00"
+    },
+    {
+      "id": "offer-A",
+      "kind": "buyer_offer",
+      "refs": [
+        "rack-A",
+        "stock-A",
+        "stock-B"
+      ],
+      "buyer": "buyer-A",
+      "quantities": {
+        "rack-A": 1,
+        "stock-A": 18,
+        "stock-B": 10
+      },
+      "minimum_quantities": {
+        "rack-A": 1,
+        "stock-A": 15,
+        "stock-B": 8
+      },
+      "allowed_variation": {
+        "stock-A": 3,
+        "stock-B": 2
+      },
+      "total": 300000,
+      "deposit": 60000,
+      "expires": "2026-12-06T18:00:00+08:00"
+    },
+    {
+      "id": "offer-B",
+      "kind": "buyer_offer",
+      "refs": [
+        "stock-A"
+      ],
+      "buyer": "buyer-B",
+      "quantities": {
+        "stock-A": 10
+      },
+      "minimum_quantities": {
+        "stock-A": 10
+      },
+      "allowed_variation": {},
+      "total": 80000,
+      "deposit": 80000,
+      "expires": "2026-12-06T18:00:00+08:00"
+    },
+    {
+      "id": "return-A",
+      "kind": "retail_return",
+      "refs": [
+        "customer-order",
+        "stock-A"
+      ],
+      "quantity": 1,
+      "condition": "opened",
+      "at": "2026-12-07T09:00:00+08:00"
+    },
+    {
+      "id": "grant-change",
+      "kind": "grant_change",
+      "refs": [
+        "grant-B"
+      ],
+      "at": "2026-12-07T10:00:00+08:00",
+      "change": "revoked"
+    },
+    {
+      "id": "pickup-A",
+      "kind": "pickup_input",
+      "refs": [
+        "offer-A",
+        "store-A",
+        "rack-A"
+      ],
+      "quantity": 1,
+      "received_by": "buyer-A",
+      "at": "2026-12-07T09:30:00+08:00"
+    }
+  ],
+  "principals": {
+    "manager-A": "asset-proposer",
+    "ownership-A": "title-review",
+    "trustee-A": "trustee",
+    "store-user-A": "store-A",
+    "store-user-B": "store-B",
+    "buyer-A": "buyer-A",
+    "buyer-B": "buyer-B",
+    "cashier-A": "cashier"
+  }
+}

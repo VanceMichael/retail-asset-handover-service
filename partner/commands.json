@@ -1,0 +1,66 @@
+{
+  "synthetic": true,
+  "commands": [
+    {
+      "id": "deposit-A",
+      "operation": "payment",
+      "refs": [
+        "offer-A"
+      ],
+      "request": {
+        "offer": "offer-A",
+        "kind": "deposit",
+        "amount": 60000
+      },
+      "response_status": 202,
+      "observations": [
+        {
+          "state": "cleared",
+          "amount": 60000,
+          "voucher": "ASSET-D1"
+        }
+      ]
+    },
+    {
+      "id": "balance-A",
+      "operation": "payment",
+      "refs": [
+        "offer-A"
+      ],
+      "request": {
+        "offer": "offer-A",
+        "kind": "balance",
+        "amount": 240000
+      },
+      "response_status": 504,
+      "observations": [
+        {
+          "state": "pending"
+        },
+        {
+          "state": "cleared",
+          "amount": 240000,
+          "voucher": "ASSET-B1"
+        }
+      ]
+    },
+    {
+      "id": "refund-A",
+      "operation": "refund",
+      "refs": [
+        "offer-A"
+      ],
+      "request": {
+        "offer": "offer-A",
+        "amount": 240000
+      },
+      "response_status": 202,
+      "observations": [
+        {
+          "state": "rejected",
+          "reason": "需补充收款人确认"
+        }
+      ]
+    }
+  ]
+}
